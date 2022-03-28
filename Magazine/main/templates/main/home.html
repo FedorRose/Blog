@@ -1,0 +1,107 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+ {% block main %}
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+
+		<div id="colorlib-main">
+
+			{% if slider %}
+
+			<aside id="colorlib-hero" class="js-fullheight">
+				<div class="flexslider js-fullheight">
+					<ul class="slides">
+					{% for i in slider %}
+				   	<li>
+				   		<div class="overlay"><img src="{{i.photo.url}}"></div>
+				   		<div class="container-fluid">
+				   			<div class="row">
+					   			<div class="col-md-12 col-xs-12 js-fullheight slider-text">
+					   				<div class="slider-text-inner">
+					   					<div class="desc">
+					   						<p class="tag"><span>{{i.cat}}</span></p>
+						   					<h1><a href="{% url 'single' i.cat.slug i.slug %}">{{i.title}}</a></h1>
+						   					<p>{{i.subtitle}}</p>
+											</div>
+					   				</div>
+					   			</div>
+					   		</div>
+				   		</div>
+				   	</li>
+					{% endfor %}
+				  	</ul>
+			  	</div>
+			</aside>
+
+			{% else %}
+
+			<div class="colorlib-featured">
+				<div class="row">
+					{% for el in slider2 %}
+						{% if forloop.first %}
+					<div class="col-md-8">
+						<div class="featured-post">
+							<div class="blog-img" style="background-image: url({{el.photo.url}});">
+								<div class="desc">
+									<p class="tag"><span>Fashion</span></p>
+									<h2><a href="#">Clothes mean nothing until someone lives in them</a></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+						{% else %}
+					<div class="col-md-4">
+						<div class="featured-post2">
+							<a href="single.html" class="blog-img" style="background-image: url({{el.photo.url}});">
+								<span class="desc">
+									<p class="tag"><span>Animal</span></p>
+									<h2>Shark the movie</h2>
+								</span>
+							</a>
+						</div>
+					</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+
+			{% endif %}
+
+			<div class="colorlib-blog">
+				<div class="container-wrap">
+					<div class="row">
+						{% for post in posts %}
+						<div class="col-md-4">
+							<div class="blog-entry animate-box">
+								<div class="blog-img" style="background-image: url({{post.photo.url}});">
+									<div class="desc text-center">
+										<p class="tag"><span>{{post.cat}}</span></p>
+										<h2 class="head-article"><a href="{% url 'single' post.cat.slug post.slug %}">{{post.title}}</a></h2>
+										<p>{{post.subtitle}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+
+					<div class="row">
+<!--						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">-->
+<!--							<ul class="pagination">-->
+<!--								<li class="disabled"><a href="#">&laquo;</a></li>-->
+<!--								<li class="active"><a href="#">1</a></li>-->
+<!--								<li><a href="#">2</a></li>-->
+<!--								<li><a href="#">3</a></li>-->
+<!--								<li><a href="#">4</a></li>-->
+<!--								<li><a href="#">&raquo;</a></li>-->
+<!--							</ul>-->
+<!--						</div>-->
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+ {% endblock %}
+
