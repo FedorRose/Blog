@@ -94,13 +94,13 @@ class Main(MDApp):
                                              adaptive_height=True)
 
     def posts(self, *args):
-        return UrlRequest('http://127.0.0.1:8000/api/v1/post/',
+        return UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/post/',
                           on_success=self.fill_board,
                           on_failure=self.fill_board)
 
     def fill_board(self, *args):
         self.collect = args[1]
-        UrlRequest('http://127.0.0.1:8000/api/v1/cats/',
+        UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/cats/',
                    on_success=self.fill_content)
 
     def fill_content(self, *args, **kwargs):
@@ -140,7 +140,7 @@ class Main(MDApp):
 
     def pr(self, *args, **kwargs):
         self.cat = args[1]
-        UrlRequest('http://127.0.0.1:8000/api/v1/post/',
+        UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/post/',
                    on_success=self.fill_board_2)
 
     def fill_board_2(self, cat, *args):
@@ -150,7 +150,7 @@ class Main(MDApp):
             if self.cat == i['slug']:
                 cat_id = i['id']
                 cat_name = i['name']
-        print(cat_id)
+        # print(cat_id)
         for i in collect:
             if i['cat'] == cat_id:
                 new_collect.append(i)
@@ -168,17 +168,17 @@ class Main(MDApp):
             self.content.add_widget(card)
 
     def single(self, *args):
-        print("args:", args)
+        # print("args:", args)
         if len(args) > 1:
             self.pks = args[1]['post']
         else:
             self.pks = args[0].pk
-        UrlRequest('http://127.0.0.1:8000/api/v1/post/{}/'.format(self.pks),
+        UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/post/{}/'.format(self.pks),
                    on_success=self.comm)
 
     def comm(self, *args):
         self.post = args[1]
-        UrlRequest('http://127.0.0.1:8000/api/v1/comment/post/{}/'.format(self.pks),
+        UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/comment/post/{}/'.format(self.pks),
                    on_success=self.fill_single,
                    on_failure=self.fill_single)
 
@@ -248,7 +248,7 @@ class Main(MDApp):
         if self.text_comm_name != '' and self.text_comm_last != '' and self.text_comm_mess != '':
             params = json.dumps({'name': self.text_comm_name, 'last_name': self.text_comm_last,
                              'text': self.text_comm_mess, 'post': self.idfp})
-            UrlRequest('http://127.0.0.1:8000/api/v1/comment/', req_body=params,
+            UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/comment/', req_body=params,
                        req_headers={'Content-Type': 'application/json'},
                        on_success=self.single)
             self.text_comm_name, self.text_comm_last, self.text_comm_mess = '', '', ''
@@ -292,7 +292,7 @@ class CardItem(MDCard, RoundedRectangularElevationBehavior):
         self.photo = ph
 
     def single(self):
-        UrlRequest('http://127.0.0.1:8000/api/v1/post/{}/'.format(self.pk),
+        UrlRequest('http://magazinefkolo.pythonanywhere.com/api/v1/post/{}/'.format(self.pk),
                    on_success=Main.fill_single)
 
 
