@@ -45,7 +45,7 @@ class ShowPost(DetailView, CreateView):
         context = super().get_context_data(**kwargs)
         context['cats'] = Category.objects.all()
         context['selected'] = self.kwargs['cat_slug']
-        context['comm_count'] = self.object.Comments.count()
+        context['recent'] = Post.objects.reverse()[:3]
         context['comments'] = self.object.Comments.filter(active=True)
         return context
 

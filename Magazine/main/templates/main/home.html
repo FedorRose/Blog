@@ -38,14 +38,14 @@
 
 			<div class="colorlib-featured">
 				<div class="row">
-					{% for el in slider2 %}
+					{% for post in slider2 %}
 						{% if forloop.first %}
 					<div class="col-md-8">
 						<div class="featured-post">
-							<div class="blog-img" style="background-image: url({{el.photo.url}});">
+							<div class="blog-img" style="background-image: url({{post.photo.url}});">
 								<div class="desc">
-									<p class="tag"><span>Fashion</span></p>
-									<h2><a href="#">Clothes mean nothing until someone lives in them</a></h2>
+									<p class="tag"><span>{{post.cat}}</span></p>
+									<h2><a href="{% url 'single' post.cat.slug post.slug %}">{{post.title}}</a></h2>
 								</div>
 							</div>
 						</div>
@@ -53,10 +53,10 @@
 						{% else %}
 					<div class="col-md-4">
 						<div class="featured-post2">
-							<a href="single.html" class="blog-img" style="background-image: url({{el.photo.url}});">
+							<a href="{% url 'single' post.cat.slug post.slug %}" class="blog-img" style="background-image: url({{post.photo.url}});">
 								<span class="desc">
-									<p class="tag"><span>Animal</span></p>
-									<h2>Shark the movie</h2>
+									<p class="tag"><span>{{post.cat}}</span></p>
+									<h2>{{post.title}}</h2>
 								</span>
 							</a>
 						</div>
@@ -87,16 +87,6 @@
 
 
 					<div class="row">
-<!--						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">-->
-<!--							<ul class="pagination">-->
-<!--								<li class="disabled"><a href="#">&laquo;</a></li>-->
-<!--								<li class="active"><a href="#">1</a></li>-->
-<!--								<li><a href="#">2</a></li>-->
-<!--								<li><a href="#">3</a></li>-->
-<!--								<li><a href="#">4</a></li>-->
-<!--								<li><a href="#">&raquo;</a></li>-->
-<!--							</ul>-->
-<!--						</div>-->
 					</div>
 				</div>
 			</div>			
